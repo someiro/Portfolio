@@ -12,9 +12,26 @@ import {
   MdLocationPin,
   MdAlternateEmail,
   MdAccessTime,
-  MdCode,
+  // MdCode,
 } from "react-icons/md";
 import { IoMdLink } from "react-icons/io";
+
+type CmsUser = {
+  userIcon: {
+    url: string;
+  };
+  userName: string;
+  userDetail: string;
+};
+
+type CmsContent = {
+  title: string;
+  url: string;
+};
+
+type CmsCollection = {
+  contents: CmsContent[];
+};
 
 export default function Home() {
   const [time, setTime] = useState("--:--:--");
@@ -39,9 +56,9 @@ export default function Home() {
     return () => clearInterval(interval);
   }, []);
 
-  const [myName, setMyName] = useState();
-  const [link, setLink] = useState();
-  const [sns, setSNS] = useState();
+  const [myName, setMyName] = useState<CmsUser | null>(null);
+  const [link, setLink] = useState<CmsCollection | null>(null);
+  const [sns, setSNS] = useState<CmsCollection | null>(null);
 
   useEffect(() => {
     const getCMS = () => {
@@ -75,8 +92,11 @@ export default function Home() {
     getCMS();
   }, []);
 
-  if (myName && link && sns) {
-    return (
+  if (!myName || !link || !sns) {
+    return null;
+  }
+
+  return (
       <>
         <Header
           maxWidth={980}
@@ -197,5 +217,4 @@ export default function Home() {
         </Container> */}
       </>
     );
-  }
 }

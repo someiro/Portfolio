@@ -1,6 +1,7 @@
 "use client";
 
-import Cropper, { Area } from "react-easy-crop";
+import Cropper from "react-easy-crop";
+import type { Area } from "react-easy-crop";
 import { useCallback, useRef, useState } from "react";
 
 import styles from "./upload.module.css";

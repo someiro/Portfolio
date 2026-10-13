@@ -1,30 +1,20 @@
 import styles from "./card.module.css";
 
 type CardProps = {
+  image?: string;
   title?: string;
   detail?: string;
   meta?: string;
 };
 
 const Card = (props: CardProps) => {
-  let title, detail, meta;
-  if (props.title) {
-    title = props.title;
-  } else {
-    title = "Card Title";
-  }
-  if (props.detail) {
-    detail = props.detail;
-  } else {
-    detail = "Detail Text";
-  }
-  if (props.meta) {
-    meta = props.meta;
-  } else {
-    meta = "yyyy-mm-dd";
-  }
+  const title = props.title ?? "Card Title";
+  const detail = props.detail ?? "Detail Text";
+  const meta = props.meta ?? "yyyy-mm-dd";
+
   return (
     <article className={styles.article}>
+      {props.image ? <img src={props.image} alt={title} /> : null}
       <div className={styles.cardInfo}>
         <h2>{title}</h2>
         <p>{detail}</p>
