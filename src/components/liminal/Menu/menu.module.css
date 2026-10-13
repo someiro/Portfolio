@@ -1,0 +1,76 @@
+.container {
+  position: fixed;
+  right: 20px;
+  bottom: 40px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  z-index: 1000;
+}
+
+.circleButton {
+  width: 60px;
+  height: 60px;
+  border: none;
+  border-radius: 999px;
+  background: #8f8f8f72;
+  backdrop-filter: blur(2px);
+  cursor: pointer;
+  transition:
+    transform 0.18s ease,
+    opacity 0.2s ease,
+    background 0.2s ease;
+}
+
+.circleButton:hover {
+  background: rgba(160, 160, 160, 0.693);
+}
+
+.circleButton:active {
+  transform: scale(0.94);
+}
+
+.menu {
+  height: 60px;
+  overflow: hidden;
+  white-space: nowrap;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 12px;
+  border-radius: 999px;
+  background: rgba(141, 141, 141, 0.536);
+  backdrop-filter: blur(4px);
+  transition:
+    max-width 0.3s ease,
+    padding 0.3s ease,
+    opacity 0.25s ease;
+  max-width: 0;
+  padding: 0;
+  opacity: 0;
+}
+
+.open {
+  max-width: 320px;
+  padding: 0 20px;
+  opacity: 1;
+}
+
+.menu button {
+  border: none;
+  background: transparent;
+  color: white;
+  white-space: nowrap;
+}
+
+.menu button:hover {
+  background: transparent;
+}
+
+.icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+  color:#fff;
+}

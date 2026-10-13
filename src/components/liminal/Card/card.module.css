@@ -1,0 +1,32 @@
+.article {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  box-sizing: border-box;
+}
+.thumbnail img {
+  width: 100px;
+  height: 100px;
+  border-radius: 20px;
+  object-fit: cover;
+}
+.cardInfo {
+  width: calc(100% - 100px);
+}
+
+.cardInfo h2,
+.cardInfo p,
+.cardInfo span {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+.cardInfo h2 {
+  font-size: 24px;
+  padding-bottom: 10px;
+}
+.cardInfo p,
+.cardInfo span {
+  font-size: 14px;
+  color: #a2a2a2;
+}

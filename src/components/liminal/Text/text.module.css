@@ -1,0 +1,25 @@
+.s {
+    font-size: 14px;
+}
+.xs {
+    font-size: 12px;
+}
+.r {
+    font-size: 15px;
+}
+.xr {
+    font-size: 17px;
+}
+.l {
+    font-size: 20px;
+}
+.xl {
+    font-size: 22.6px;
+}
+
+.bold {
+    font-weight: bold;
+}
+.normal {
+    font-weight: normal;
+}

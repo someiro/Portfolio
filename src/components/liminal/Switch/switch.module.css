@@ -1,0 +1,66 @@
+.wrapper {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  user-select: none;
+  cursor: pointer;
+}
+
+.switch {
+  position: relative;
+  width: 52px;
+  height: 30px;
+
+  border: none;
+  border-radius: 999px;
+
+  background: #cfcfcf;
+
+  cursor: pointer;
+
+  transition:
+    background 0.2s ease,
+    opacity 0.2s ease;
+
+  padding: 0;
+}
+
+.switch:hover {
+  opacity: 0.9;
+}
+
+.checked {
+  background: #4a93ff;
+}
+
+.thumb {
+  position: absolute;
+
+  top: 3px;
+  left: 3px;
+
+  width: 24px;
+  height: 24px;
+
+  border-radius: 999px;
+
+  background: white;
+
+  transition:
+    transform 0.22s ease,
+    background 0.2s ease;
+}
+
+.checked .thumb {
+  transform: translateX(22px);
+}
+
+.label {
+  font-size: 15px;
+  color: inherit;
+}
+
+.disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}

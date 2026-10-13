@@ -1,0 +1,33 @@
+.tabsContainer {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  border: none;
+  border-bottom: #dddddd 1px solid;
+  margin-bottom: 18px;
+}
+.tabsContainer button {
+  font-size: 18px;
+  margin: 0px 0px;
+  border: none;
+  border-bottom: #ffffff00 solid 1px;
+  color: #252525;
+  padding: 8px 28px;
+  text-align: center;
+  background: none;
+}
+
+.tabsContainer button:hover {
+  border: none;
+  border-bottom: #797979 solid 1px;
+  cursor: pointer;
+}
+
+.tabsContainer button.select {
+  border: none;
+  border-bottom: #404040 solid 1px;
+}
+.tabsItemContainer {
+    margin-bottom: 18px;
+}

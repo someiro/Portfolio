@@ -1,0 +1,26 @@
+.badge {
+  padding: 2px;
+  border-radius: 4px;
+  margin: 3px 0;
+  display: inline-block;
+}
+.shade {
+  background: #f4f4f4;
+  color: #4f4f4f;
+}
+.primary {
+  background: #d6e5fe;
+  color: #2878aa;
+}
+.secondary {
+  background: #bdf1cf;
+  color: #239c55;
+}
+.negative {
+  background: #f1bdbd;
+  color: #9c2b23;
+}
+.notice {
+  background: #f1e9b1;
+  color: #9c8c23;
+}

@@ -1,0 +1,31 @@
+.Input {
+  width: 100%;
+}
+.input {
+  width: 100%;
+  padding: 13px;
+  font-size: 16px;
+  border-radius: 5px;
+  border: solid #c2c2c2 1px;
+  margin-top: 6px;
+}
+.input:focus {
+  outline-color: #4792e3;
+}
+.label {
+  color: #595959;
+  font-size: 14.6px;
+}
+.label span {
+  color: #e35147;
+}
+.error {
+  border: solid #e35147 1px;
+}
+.sublabel {
+  color: #e45c5c;
+  font-size: 14.6px;
+}
+.medium {
+    padding: 7.8px 13px;
+}
