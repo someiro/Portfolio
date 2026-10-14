@@ -12,7 +12,7 @@ import {
   MdLocationPin,
   MdAlternateEmail,
   MdAccessTime,
-  // MdCode,
+  MdCode,
 } from "react-icons/md";
 import { IoMdLink } from "react-icons/io";
 
@@ -27,6 +27,7 @@ type CmsUser = {
 type CmsContent = {
   title: string;
   url: string;
+  stack?: string;
 };
 
 type CmsCollection = {
@@ -59,6 +60,7 @@ export default function Home() {
   const [myName, setMyName] = useState<CmsUser | null>(null);
   const [link, setLink] = useState<CmsCollection | null>(null);
   const [sns, setSNS] = useState<CmsCollection | null>(null);
+  const [project, setProject] = useState<CmsCollection | null>(null);
 
   useEffect(() => {
     const getCMS = () => {
@@ -88,11 +90,19 @@ export default function Home() {
       })
         .then((res) => res.json())
         .then((data) => setSNS(data));
+      fetch("https://some16.microcms.io/api/v1/project", {
+        method: "GET",
+        headers: {
+          "X-MICROCMS-API-KEY": "SoWrYdhI38HUcJMQVWqhITOl3bvtBC4XBmMg",
+        },
+      })
+        .then((res) => res.json())
+        .then((data) => setProject(data));
     };
     getCMS();
   }, []);
 
-  if (!myName || !link || !sns) {
+  if (!myName || !link || !sns || !project) {
     return null;
   }
 
@@ -199,7 +209,7 @@ export default function Home() {
           <Spacer size={20} />
         </Container>
 
-        {/* <Container padding={true}>
+        <Container padding={true}>
           <h1>
             <MdCode />
           </h1>
@@ -207,14 +217,19 @@ export default function Home() {
           <Spacer size={20} />
 
           <CardContainer padding={true}>
-            <Card title="GitHub" detail="https://github.com/someiro" meta=" " />
-            <Card title="Zenn" detail="https://zenn.dev/someiro" meta=" " />
+            {project.contents.map((content) => {
+              return (
+                <a href={content.url} target="_blank" rel="noopener noreferrer">
+                  <Card title={content.title} detail={content.stack} meta=" " />
+                </a>
+              );
+            })}
           </CardContainer>
 
           <Spacer size={40} />
           <hr />
           <Spacer size={20} />
-        </Container> */}
+        </Container>
       </>
     );
 }
