@@ -254,9 +254,18 @@ export default function Home() {
 
         <Container padding={true}>
           {cert.contents.map((content) => {
+            const date = new Date(content.date);
+            const formatted = new Intl.DateTimeFormat("ja-JP-u-ca-japanese", {
+              ere: "long",
+              year: "numeric",
+              month: "long",
+              day: "numeric",
+              timeZone: "Asia/Tokyo"
+            }).format(date);
+
             return (
               <>
-                <Card title={content.title} detail={content.date} meta=" " />
+                <Card title={content.title} detail={formatted} meta=" " />
                 <Spacer size={20} />
               </>
             );
