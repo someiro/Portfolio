@@ -254,9 +254,9 @@ export default function Home() {
 
         <Container padding={true}>
           {cert.contents.map((content) => {
-            const date = new Date(content.date);
+            const date = new Date(content.date!);
             const formatted = new Intl.DateTimeFormat("ja-JP-u-ca-japanese", {
-              ere: "long",
+              era: "long",
               year: "numeric",
               month: "long",
               day: "numeric",
