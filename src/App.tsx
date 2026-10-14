@@ -9,12 +9,14 @@ import {
 } from "./components/liminal";
 
 import {
+  MdLink,
   MdLocationPin,
   MdAlternateEmail,
   MdAccessTime,
   MdCode,
 } from "react-icons/md";
-import { IoMdLink } from "react-icons/io";
+
+import { PiCertificateBold } from "react-icons/pi";
 
 type CmsUser = {
   userIcon: {
@@ -26,8 +28,9 @@ type CmsUser = {
 
 type CmsContent = {
   title: string;
-  url: string;
+  url?: string;
   stack?: string;
+  date?: string;
 };
 
 type CmsCollection = {
@@ -61,6 +64,7 @@ export default function Home() {
   const [link, setLink] = useState<CmsCollection | null>(null);
   const [sns, setSNS] = useState<CmsCollection | null>(null);
   const [project, setProject] = useState<CmsCollection | null>(null);
+  const [cert, setCert] = useState<CmsCollection | null>(null);
 
   useEffect(() => {
     const getCMS = () => {
@@ -76,7 +80,7 @@ export default function Home() {
       fetch("https://some16.microcms.io/api/v1/link", {
         method: "GET",
         headers: {
-          "X-MICROCMS-API-KEY": "SoWrYdhI38HUcJMQVWqhITOl3bvtBC4XBmMg",
+          "X-MICROCMS-API-KEY": import.meta.env.VITE_X_MICROCMS_API_KEY,
         },
       })
         .then((res) => res.json())
@@ -85,7 +89,7 @@ export default function Home() {
       fetch("https://some16.microcms.io/api/v1/sns", {
         method: "GET",
         headers: {
-          "X-MICROCMS-API-KEY": "SoWrYdhI38HUcJMQVWqhITOl3bvtBC4XBmMg",
+          "X-MICROCMS-API-KEY": import.meta.env.VITE_X_MICROCMS_API_KEY,
         },
       })
         .then((res) => res.json())
@@ -93,143 +97,176 @@ export default function Home() {
       fetch("https://some16.microcms.io/api/v1/project", {
         method: "GET",
         headers: {
-          "X-MICROCMS-API-KEY": "SoWrYdhI38HUcJMQVWqhITOl3bvtBC4XBmMg",
+          "X-MICROCMS-API-KEY": import.meta.env.VITE_X_MICROCMS_API_KEY,
         },
       })
         .then((res) => res.json())
         .then((data) => setProject(data));
+      fetch("https://some16.microcms.io/api/v1/cert", {
+        method: "GET",
+        headers: {
+          "X-MICROCMS-API-KEY": import.meta.env.VITE_X_MICROCMS_API_KEY,
+        },
+      })
+        .then((res) => res.json())
+        .then((data) => setCert(data));
     };
     getCMS();
   }, []);
 
-  if (!myName || !link || !sns || !project) {
+  if (!myName || !link || !sns || !project || !cert) {
     return null;
   }
 
   return (
-      <>
-        <Header
-          maxWidth={980}
-          fixed={true}
-          left={
-            <Text size="xl" weight="bold">
-              Portfolio
-            </Text>
-          }
-          right={<>ver 26.10</>}
+    <>
+      <Header
+        maxWidth={980}
+        fixed={true}
+        left={
+          <Text size="xl" weight="bold">
+            Portfolio
+          </Text>
+        }
+        right={<>ver 26.10</>}
+      />
+
+      <Spacer size={120} />
+
+      <Container padding={true}>
+        <img
+          style={{ borderRadius: "50px" }}
+          width="100"
+          height="100"
+          src={myName.userIcon["url"]}
         />
+        <Spacer size={16} />
+        <h1>{myName.userName}</h1>
+        <Spacer size={16} />
+        <p>{myName.userDetail}</p>
+      </Container>
 
-        <Spacer size={120} />
+      <Spacer size={120} />
 
-        <Container padding={true}>
-          <img
-            style={{ borderRadius: "50px" }}
-            width="100"
-            height="100"
-            src={myName.userIcon["url"]}
-          />
-          <Spacer size={16} />
-          <h1>{myName.userName}</h1>
-          <Spacer size={16} />
-          <p>{myName.userDetail}</p>
-        </Container>
+      <Container padding={true}>
+        <h1>
+          <MdLocationPin />
+        </h1>
 
-        <Spacer size={120} />
+        <Spacer size={25} />
 
-        <Container padding={true}>
-          <h1>
-            <MdLocationPin />
-          </h1>
+        <CardContainer padding={true}>
+          <Card title="Saitama, Japan" detail=" " meta=" " />
+        </CardContainer>
+        <Spacer size={30} />
+      </Container>
 
-          <Spacer size={25} />
+      <Container padding={true}>
+        <h1>
+          <MdAccessTime />
+        </h1>
 
-          <CardContainer padding={true}>
-            <Card title="Saitama, Japan" detail=" " meta=" " />
-          </CardContainer>
-          <Spacer size={30} />
-        </Container>
+        <Spacer size={20} />
 
-        <Container padding={true}>
-          <h1>
-            <MdAccessTime />
-          </h1>
+        <CardContainer padding={true}>
+          <Card title={time} detail="UTC +09:00" meta=" " />
+        </CardContainer>
 
-          <Spacer size={20} />
+        <Spacer size={40} />
+        <hr />
+        <Spacer size={20} />
+      </Container>
 
-          <CardContainer padding={true}>
-            <Card title={time} detail="UTC +09:00" meta=" " />
-          </CardContainer>
+      <Container padding={true}>
+        <h1>
+          <MdLink />
+        </h1>
 
-          <Spacer size={40} />
-          <hr />
-          <Spacer size={20} />
-        </Container>
+        <Spacer size={20} />
 
-        <Container padding={true}>
-          <h1>
-            <IoMdLink />
-          </h1>
+        <CardContainer padding={true}>
+          {link.contents.map((content) => {
+            return (
+              <a href={content.url} target="_blank" rel="noopener noreferrer">
+                <Card title={content.title} detail={content.url} meta=" " />
+              </a>
+            );
+          })}
+        </CardContainer>
 
-          <Spacer size={20} />
+        <Spacer size={40} />
+        <hr />
+        <Spacer size={20} />
+      </Container>
 
-          <CardContainer padding={true}>
-            {link.contents.map((content) => {
-              return (
-                <a href={content.url} target="_blank" rel="noopener noreferrer">
-                  <Card title={content.title} detail={content.url} meta=" " />
-                </a>
-              );
-            })}
-          </CardContainer>
+      <Container padding={true}>
+        <h1>
+          <MdAlternateEmail />
+        </h1>
 
-          <Spacer size={40} />
-          <hr />
-          <Spacer size={20} />
-        </Container>
+        <Spacer size={25} />
 
-        <Container padding={true}>
-          <h1>
-            <MdAlternateEmail />
-          </h1>
+        <CardContainer padding={true}>
+          {sns.contents.map((content) => {
+            return (
+              <a href={content.url} target="_blank" rel="noopener noreferrer">
+                <Card title={content.title} detail={content.url} meta=" " />
+              </a>
+            );
+          })}
+        </CardContainer>
 
-          <Spacer size={25} />
+        <Spacer size={40} />
+        <hr />
+        <Spacer size={20} />
+      </Container>
 
-          <CardContainer padding={true}>
-            {sns.contents.map((content) => {
-              return (
-                <a href={content.url} target="_blank" rel="noopener noreferrer">
-                  <Card title={content.title} detail={content.url} meta=" " />
-                </a>
-              );
-            })}
-          </CardContainer>
+      <Container padding={true}>
+        <h1>
+          <MdCode />
+        </h1>
 
-          <Spacer size={40} />
-          <hr />
-          <Spacer size={20} />
-        </Container>
+        <Spacer size={20} />
 
-        <Container padding={true}>
-          <h1>
-            <MdCode />
-          </h1>
-
-          <Spacer size={20} />
-
-          <CardContainer padding={true}>
-            {project.contents.map((content) => {
-              return (
+        <CardContainer padding={true}>
+          {project.contents.map((content) => {
+            return (
+              <>
                 <a href={content.url} target="_blank" rel="noopener noreferrer">
                   <Card title={content.title} detail={content.stack} meta=" " />
                 </a>
-              );
-            })}
-          </CardContainer>
+              </>
+            );
+          })}
+        </CardContainer>
 
-          <Spacer size={40} />
-          <hr />
-          <Spacer size={20} />
+        <Spacer size={40} />
+        <hr />
+        <Spacer size={20} />
+      </Container>
+
+      <Container padding={true}>
+        <h1>
+          <PiCertificateBold />
+        </h1>
+
+        <Spacer size={20} />
+
+        <Container padding={true}>
+          {cert.contents.map((content) => {
+            return (
+              <>
+                <Card title={content.title} detail={content.date} meta=" " />
+                <Spacer size={20} />
+              </>
+            );
+          })}
         </Container>
-      </>
-    );
+
+        <Spacer size={40} />
+        <hr />
+        <Spacer size={20} />
+      </Container>
+    </>
+  );
 }
