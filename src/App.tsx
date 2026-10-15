@@ -18,6 +18,8 @@ import {
 
 import { PiCertificateBold } from "react-icons/pi";
 
+import { Temporal } from '@js-temporal/polyfill';
+
 type CmsUser = {
   userIcon: {
     url: string;
@@ -39,6 +41,7 @@ type CmsCollection = {
 
 export default function Home() {
   const [time, setTime] = useState("--:--:--");
+  const [YYYY, setYYYY] = useState<number>();
 
   useEffect(() => {
     const updateTime = () => {
@@ -52,6 +55,10 @@ export default function Home() {
       }).format(dateObject);
 
       setTime(time);
+
+      // 何これすげぇ
+      const nowJST = Temporal.Now.zonedDateTimeISO('Asia/Tokyo');
+      setYYYY(nowJST.year);
     };
 
     updateTime();
@@ -275,6 +282,11 @@ export default function Home() {
         <Spacer size={40} />
         <hr />
         <Spacer size={20} />
+      </Container>
+      
+      <Container padding={true}>
+          <Text>Copyright (c) { YYYY } { myName.userName } All rights reserved.</Text>
+          <Spacer size={40} />
       </Container>
     </>
   );
