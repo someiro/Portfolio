@@ -285,7 +285,7 @@ export default function Home() {
       </Container>
       
       <Container padding={true}>
-          <Text>Copyright (c) { YYYY } { myName.userName } All rights reserved.</Text>
+          <Text size="xs">Copyright (c) { YYYY } { myName.userName } All rights reserved.</Text>
           <Spacer size={40} />
       </Container>
     </>
