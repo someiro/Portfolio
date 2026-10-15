@@ -72,6 +72,8 @@ export default function Home() {
   const [sns, setSNS] = useState<CmsCollection | null>(null);
   const [project, setProject] = useState<CmsCollection | null>(null);
   const [cert, setCert] = useState<CmsCollection | null>(null);
+  const avatarUrl = myName?.userIcon.url;
+  const [readyAvatarUrl, setReadyAvatarUrl] = useState<string | null>(null);
 
   useEffect(() => {
     const getCMS = () => {
@@ -121,6 +123,25 @@ export default function Home() {
     getCMS();
   }, []);
 
+  useEffect(() => {
+    if (!avatarUrl) return;
+
+    let cancelled = false;
+    const image = new Image();
+    image.src = avatarUrl;
+    image.decode().then(() => {
+      if (!cancelled) setReadyAvatarUrl(avatarUrl);
+    }).catch(() => {
+      if (!cancelled && image.complete && image.naturalWidth > 0) {
+        setReadyAvatarUrl(avatarUrl);
+      }
+    });
+
+    return () => {
+      cancelled = true;
+    };
+  }, [avatarUrl]);
+
   if (!myName || !link || !sns || !project || !cert) {
     return null;
   }
@@ -142,10 +163,14 @@ export default function Home() {
 
       <Container padding={true}>
         <img
-          style={{ borderRadius: "50px" }}
+          style={{
+            borderRadius: "50px",
+            visibility: readyAvatarUrl === avatarUrl ? "visible" : "hidden",
+          }}
           width="100"
           height="100"
-          src={myName.userIcon["url"]}
+          src={avatarUrl}
+          alt={myName.userName}
         />
         <Spacer size={16} />
         <h1>{myName.userName}</h1>
