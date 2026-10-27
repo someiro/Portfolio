@@ -2,12 +2,7 @@ import { useState, useEffect } from "react";
 
 import { Link } from "react-router-dom";
 
-import {
-  Card,
-  CardContainer,
-  Container,
-  Spacer,
-} from "./components/liminal";
+import { Card, CardContainer, Container, Spacer } from "./components/liminal";
 
 import {
   MdLink,
@@ -122,13 +117,16 @@ const Home = () => {
     let cancelled = false;
     const image = new Image();
     image.src = avatarUrl;
-    image.decode().then(() => {
-      if (!cancelled) setReadyAvatarUrl(avatarUrl);
-    }).catch(() => {
-      if (!cancelled && image.complete && image.naturalWidth > 0) {
-        setReadyAvatarUrl(avatarUrl);
-      }
-    });
+    image
+      .decode()
+      .then(() => {
+        if (!cancelled) setReadyAvatarUrl(avatarUrl);
+      })
+      .catch(() => {
+        if (!cancelled && image.complete && image.naturalWidth > 0) {
+          setReadyAvatarUrl(avatarUrl);
+        }
+      });
 
     return () => {
       cancelled = true;
@@ -244,7 +242,10 @@ const Home = () => {
           {project.contents.map((content) => {
             return (
               <>
-                <Link to={`/project/${content.title}`} state={content}>
+                <Link
+                  to={`/project/${content.title}`}
+                  state={content}
+                >
                   <Card title={content.title} detail={content.stack} meta=" " />
                 </Link>
               </>
@@ -272,7 +273,7 @@ const Home = () => {
               year: "numeric",
               month: "long",
               day: "numeric",
-              timeZone: "Asia/Tokyo"
+              timeZone: "Asia/Tokyo",
             }).format(date);
 
             return (
@@ -284,9 +285,8 @@ const Home = () => {
           })}
         </Container>
       </Container>
-
     </>
   );
-}
+};
 
 export default Home;

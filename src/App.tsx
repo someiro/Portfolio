@@ -1,18 +1,19 @@
 import { useState, useEffect } from "react";
 import { Routes, Route } from "react-router-dom";
-import { Temporal } from '@js-temporal/polyfill';
+
+import { Temporal } from "@js-temporal/polyfill";
 import { Header, Text, Spacer, Container } from "./components/liminal";
 
+import ScrollTop from "./ScrollTop";
 import Home from "./Home";
 import Project from "./Project";
 
 export default function App() {
-
   const [YYYY, setYYYY] = useState<number>();
 
   useEffect(() => {
     const getYear = () => {
-      const nowJST = Temporal.Now.zonedDateTimeISO('Asia/Tokyo');
+      const nowJST = Temporal.Now.zonedDateTimeISO("Asia/Tokyo");
       setYYYY(nowJST.year);
     };
     getYear();
@@ -20,6 +21,7 @@ export default function App() {
 
   return (
     <>
+      <ScrollTop />
       <Header
         maxWidth={980}
         fixed={true}
@@ -28,7 +30,7 @@ export default function App() {
             Portfolio
           </Text>
         }
-        right={<>ver 26.10</>}
+        right={<>ver 26.27</>}
       />
 
       <Spacer size={120} />
@@ -37,7 +39,7 @@ export default function App() {
         <Route path="/" element={<Home />} />
         <Route path="/project/:projectId" element={<Project />} />
       </Routes>
-        
+
       <Container padding={true}>
         <Spacer size={40} />
         <hr />
