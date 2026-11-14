@@ -142,11 +142,11 @@ const Home = () => {
       <Container padding={true}>
         <img
           style={{
-            borderRadius: "50px",
+            borderRadius: "100px",
             visibility: readyAvatarUrl === avatarUrl ? "visible" : "hidden",
           }}
-          width="100"
-          height="100"
+          width="135"
+          height="135"
           src={avatarUrl}
           alt={myName.userName}
         />
