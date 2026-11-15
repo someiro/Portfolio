@@ -35,6 +35,7 @@ type CmsCollection = {
 
 const Home = () => {
   const [time, setTime] = useState("--:--:--");
+  const [isLoading, setIsLoading] = useState<boolean>(true);
 
   useEffect(() => {
     const updateTime = () => {
@@ -109,6 +110,7 @@ const Home = () => {
         .then((data) => setCert(data));
     };
     getCMS();
+    setIsLoading(false);
   }, []);
 
   useEffect(() => {
@@ -135,8 +137,9 @@ const Home = () => {
 
   if (!myName || !link || !sns || !project || !cert) {
     return null;
-  }
+  } 
 
+  if (!isLoading) {
   return (
     <>
       <Container padding={true}>
@@ -287,6 +290,7 @@ const Home = () => {
       </Container>
     </>
   );
+  }
 };
 
 export default Home;

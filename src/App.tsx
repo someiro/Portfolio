@@ -30,7 +30,7 @@ export default function App() {
             Portfolio
           </Text>
         }
-        right={<>ver 26.27</>}
+        right={<>ver 26.11</>}
       />
 
       <Spacer size={120} />
