@@ -1,17 +1,22 @@
+
 .article {
   width: 100%;
   display: flex;
-  justify-content: space-between;
+  gap: 20px;
   box-sizing: border-box;
 }
-.thumbnail img {
+
+.article img {
   width: 100px;
   height: 100px;
   border-radius: 20px;
   object-fit: cover;
+  flex-shrink: 0;
 }
+
 .cardInfo {
-  width: calc(100% - 100px);
+  flex: 1;
+  min-width: 0;
 }
 
 .cardInfo h2,
@@ -20,10 +25,12 @@
   overflow: hidden;
   text-overflow: ellipsis;
 }
+
 .cardInfo h2 {
   font-size: 24px;
   padding-bottom: 10px;
 }
+
 .cardInfo p,
 .cardInfo span {
   font-size: 14px;
